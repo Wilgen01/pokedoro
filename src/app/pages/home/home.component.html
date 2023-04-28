@@ -1,0 +1,20 @@
+<section class="container max-w-xl xl:w-6/12 m-auto mt-5 sm:w-full min-w-min overflow-hidden">
+    <div class="w-full py-10 bg-custom-teal border-4 border-custom-dark-teal relative custom-border">
+        <h1 class="text-2xl ml-3 text-center">Wilgen García</h1>
+        <p class="text-xs text-cyan-100/75 ml-3 text-center">{{'Inicio de la aventura: 21/04/2023'}}</p>
+        <p class="md:text-7xl text-6xl text-cyan-100/75 text-center mt-7">{{timeLeft()}}</p>
+    </div>
+    <div class="playground bg-cover bg-center bg-no-repeat aspect-video w-full flex justify-center items-center">
+        <img class="pb-4 max-w-[10%]" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/265.gif" alt="">
+    </div>
+    <app-text-box [text]="text"></app-text-box>
+    <div class="w-full py-10 bg-custom-teal px-3">
+        <button *ngIf="!isRunning()" class="bg-custom-green hover:bg-custom-lightgreen p-4 w-full" (click)="startTimer()">Buscar</button>
+        <button *ngIf="isRunning()" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="stopTimer()">Detener</button>
+        <div class="grid grid-cols-2 gap-3 mt-2">
+            <button class="bg-custom-steelblue hover:bg-opacity-90 p-4">Caja</button>
+            <button class="bg-custom-dark-teal hover:bg-opacity-90 p-4 text-ellipsis overflow-clip">Opiciones</button>
+
+        </div>
+    </div>
+</section>
