@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, interval, takeUntil, takeWhile, tap } from 'rxjs';
+import { steps } from '../../enums/steps.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,12 @@ export class PomodoroService {
   private stop$ : Subject<boolean>= new Subject;
   private _timeLeft: number = 15 * 60;
   private _isRunning: boolean = false;
+  private _step: steps = steps.NOT_STARTED;
 
+  
+  public get step(): steps {
+    return this._step;
+  }
 
   public get isRunning(): boolean {
     return this._isRunning;
@@ -41,6 +47,7 @@ export class PomodoroService {
   }
 
   public completeTimer(){
+    this._step = steps.SPAWNED;
     this.stopTimer();
   }
 
