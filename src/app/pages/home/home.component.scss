@@ -7,19 +7,6 @@
     border: 4px solid #337aa3;
 }
 
-.playground {
-    background-image: url('../../../assets/img/playground.jpg');
-
-    img {
-        transform: scale(3);
-    }
-    @media (max-width: 500px) {
-        img {
-            transform: scale(2);
-        }
-    }
-}
-
 .btn:hover{
     --tw-bg-opacity: .1;
 }

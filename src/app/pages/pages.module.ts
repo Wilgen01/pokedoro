@@ -5,6 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { HomeComponent } from './home/home.component';
 import { TextBoxModule } from '../shared/components/text-box/text-box.module';
 import { PomodoroService } from '../shared/services/pomodoro/pomodoro.service';
+import { PlaygroundModule } from '../shared/components/playground/playground.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { PomodoroService } from '../shared/services/pomodoro/pomodoro.service';
   imports: [
     CommonModule,
     PagesRoutingModule,
-    TextBoxModule
+    TextBoxModule,
+    PlaygroundModule
   ],
   providers: [
     PomodoroService

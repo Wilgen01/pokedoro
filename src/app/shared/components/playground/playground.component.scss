@@ -1,0 +1,13 @@
+
+.playground {
+    background-image: url('../../../../assets/img/playground.jpg');
+
+    img {
+        transform: scale(3);
+    }
+    @media (max-width: 500px) {
+        img {
+            transform: scale(2);
+        }
+    }
+}
