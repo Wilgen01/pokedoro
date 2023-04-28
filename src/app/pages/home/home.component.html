@@ -7,8 +7,9 @@
     <app-playground></app-playground>
     <app-text-box [text]="text"></app-text-box>
     <div class="w-full py-10 bg-custom-teal px-3">
-        <button *ngIf="!isRunning()" class="bg-custom-green hover:bg-custom-lightgreen p-4 w-full" (click)="startTimer()">Buscar</button>
-        <button *ngIf="isRunning()" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="stopTimer()">Detener</button>
+        <button *ngIf="this.isNotStarted" class="bg-custom-green hover:bg-custom-lightgreen p-4 w-full" (click)="startTimer()">Buscar</button>
+        <button *ngIf="this.isRunning" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="stopTimer()">Detener</button>
+        <button *ngIf="this.isSpawn" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="stopTimer()">Capturar</button>
         <div class="grid grid-cols-2 gap-3 mt-2">
             <button class="bg-custom-steelblue hover:bg-opacity-90 p-4">Caja</button>
             <button class="bg-custom-dark-teal hover:bg-opacity-90 p-4 text-ellipsis overflow-clip">Opiciones</button>

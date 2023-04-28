@@ -1,4 +1,4 @@
-export enum steps {
+export enum Steps {
     NOT_STARTED = 0,
     RUNNING = 1,
     SPAWNED = 2,

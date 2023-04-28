@@ -1,9 +1,15 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonService {
 
-  constructor() { }
+  private readonly http = inject(HttpClient)
+
+  getPokemons(){
+    return this.http.get('../../../../assets/staticData/pokemons.json')
+  }
+
 }
