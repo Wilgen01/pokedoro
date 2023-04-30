@@ -5,7 +5,7 @@
         <p class="md:text-7xl text-6xl text-cyan-100/75 text-center mt-7">{{timeLeft()}}</p>
     </div>
     <app-playground></app-playground>
-    <app-text-box [text]="text"></app-text-box>
+    <app-text-box [text]="this.text"></app-text-box>
     <div class="w-full py-10 bg-custom-teal px-3">
         <button *ngIf="this.isNotStarted" class="bg-custom-green hover:bg-custom-lightgreen p-4 w-full" (click)="startTimer()">Buscar</button>
         <button *ngIf="this.isRunning" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="stopTimer()">Detener</button>

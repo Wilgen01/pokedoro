@@ -3,6 +3,7 @@ import { PomodoroService } from '../../services/pomodoro/pomodoro.service';
 import { Steps } from '../../enums/steps.enum';
 import { takeUntil, Subject, tap } from 'rxjs';
 import { PokemonService } from '../../services/pokemon/pokemon.service';
+import { PokemonList } from '../../models/pokemonList.interface';
 
 @Component({
   selector: 'app-playground',
@@ -26,25 +27,29 @@ export class PlaygroundComponent implements OnInit {
     .subscribe(stepFromService =>{
       this.isSpawn = stepFromService == Steps.SPAWNED
       if (stepFromService == Steps.SPAWNED) {
-        this.spawnRandomPokemon()
+        this.generateRandomPokemon()
       }
     })
   }
 
-  public spawnRandomPokemon() {
+  public generateRandomPokemon() {
+    const randomPokemonId = Math.floor(Math.random() * 386) + 1;
+    this.pokemonService.getPokemons().subscribe(pokemonList =>{
+      this.spawnRandomPokemon(pokemonList[randomPokemonId], randomPokemonId)
+    })
+  }
+
+  public spawnRandomPokemon(pokemon : PokemonList, idPokemon: number) {
     this.pokemonUrl = '';
     const shinyProbability  = 1
-    const randomPokemonId = Math.floor(Math.random() * 386) + 1;
     const shinyRatio = Math.floor(Math.random() * 100) + 1;
-    this.pokemonService.getPokemons()
-      .subscribe(() => {
-        if (shinyRatio <= shinyProbability) {
-          this.pokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/${randomPokemonId}.gif`
-        }else{
-          this.pokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${randomPokemonId}.gif`
-        }
-      }
-    )
+    console.log(`Oh! un ${pokemon.name} salvaje ha aparecido`);
+    
+    if (shinyRatio <= shinyProbability) {
+      this.pokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/${idPokemon}.gif`
+    }else{
+      this.pokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${idPokemon}.gif`
+    }
   }
 
 }
