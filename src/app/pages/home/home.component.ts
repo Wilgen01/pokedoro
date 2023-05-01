@@ -49,5 +49,9 @@ export class HomeComponent {
     this.text = event;
   }
 
+  public catchPokemon(){
+    // this.pomodoroService.step$ = Steps.POKEBALL_USED
+  }
+
 
 }

@@ -10,12 +10,12 @@ export class PomodoroService {
   private timer$: Observable<number>;
   private stop$ : Subject<boolean>= new Subject;
   private _step$: Subject<Steps> = new Subject;
+  private _timeLeft: number = 15 * 60;
 
   public get step$(): Observable<Steps> {
     return this._step$.asObservable();
   }
 
-  private _timeLeft: number = 15 * 60;
 
 
 

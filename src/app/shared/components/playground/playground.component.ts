@@ -18,6 +18,7 @@ export class PlaygroundComponent implements OnInit {
   @Output() pokemonSpawned = new EventEmitter<string>();
   private destroy$ = new Subject<void>();
   public isSpawn : boolean = false;
+  public isPokeballUsed : boolean = false;
   public pokemonUrl : string = '';
   
   ngOnInit(): void {
@@ -26,9 +27,12 @@ export class PlaygroundComponent implements OnInit {
       tap(()=> console.log('playground component ngoninit'))
     )
     .subscribe(stepFromService =>{
-      this.isSpawn = stepFromService == Steps.SPAWNED
       if (stepFromService == Steps.SPAWNED) {
-        this.generateRandomPokemon()
+        this.isSpawn = true;
+        this.generateRandomPokemon();
+      }
+      if (stepFromService == Steps.POKEBALL_USED) {
+        this.isPokeballUsed = true;
       }
     })
   }
