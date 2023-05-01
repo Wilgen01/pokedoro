@@ -6,11 +6,13 @@ import { HomeComponent } from './home/home.component';
 import { TextBoxModule } from '../shared/components/text-box/text-box.module';
 import { PomodoroService } from '../shared/services/pomodoro/pomodoro.service';
 import { PlaygroundModule } from '../shared/components/playground/playground.module';
+import { BoxComponent } from './box/box.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    BoxComponent
   ],
   imports: [
     CommonModule,

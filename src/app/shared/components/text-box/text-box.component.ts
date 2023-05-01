@@ -27,7 +27,7 @@ export class TextBoxComponent implements OnInit, OnChanges , OnDestroy{
 
   ngOnDestroy() {
     this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+    this.destroy$.complete();
   }
 
   private animateText() {

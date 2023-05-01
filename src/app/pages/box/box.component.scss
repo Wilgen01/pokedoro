@@ -1,0 +1,8 @@
+.custom-border::after{
+    content: ' ';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #337aa3;
+}

@@ -1,19 +1,21 @@
-<section class="container max-w-xl xl:w-6/12 m-auto xl:mt-5 sm:w-full min-w-min overflow-hidden">
-    <div class="w-full py-10 bg-custom-teal border-4 border-custom-dark-teal relative custom-border">
-        <h1 class="text-2xl ml-3 text-center">Wilgen García</h1>
-        <p class="text-xs text-cyan-100/75 ml-3 text-center">{{'Inicio de la aventura: 21/04/2023'}}</p>
-        <p class="md:text-7xl text-6xl text-cyan-100/75 text-center mt-7">{{timeLeft()}}</p>
-    </div>
-    <app-playground (pokemonSpawned)="pokemonSpawned($event)"></app-playground>
-    <app-text-box [text]="this.text"></app-text-box>
-    <div class="w-full py-10 bg-custom-teal px-3">
-        <button *ngIf="this.isNotStarted" class="bg-custom-green hover:bg-custom-lightgreen p-4 w-full" (click)="startTimer()">Buscar</button>
-        <button *ngIf="this.isRunning" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="stopTimer()">Detener</button>
-        <button *ngIf="this.isSpawn || this.isPokeballUsed" [disabled]="this.isPokeballUsed" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="catchPokemon()">Capturar</button>
-        <div class="grid grid-cols-2 gap-3 mt-2">
-            <button class="bg-custom-steelblue hover:bg-opacity-90 p-4">Caja</button>
-            <button class="bg-custom-dark-teal hover:bg-opacity-90 p-4 text-ellipsis overflow-clip">Opiciones</button>
-
+<div class="h-screen flex">
+    <section class="container max-w-xl xl:w-6/12 m-auto sm:w-full min-w-min overflow-hidden">
+        <div class="w-full py-10 bg-custom-teal border-4 border-custom-dark-teal relative custom-border">
+            <h1 class="text-2xl ml-3 text-center">Wilgen García</h1>
+            <p class="text-xs text-cyan-100/75 ml-3 text-center">{{'Inicio de la aventura: 21/04/2023'}}</p>
+            <p class="md:text-7xl text-6xl text-cyan-100/75 text-center mt-7">{{timeLeft()}}</p>
         </div>
-    </div>
-</section>
+        <app-playground (pokemonSpawned)="pokemonSpawned($event)"></app-playground>
+        <app-text-box [text]="this.text"></app-text-box>
+        <div class="w-full py-10 bg-custom-teal px-3">
+            <button *ngIf="this.isNotStarted" class="bg-custom-green hover:bg-custom-lightgreen p-4 w-full" (click)="startTimer()">Buscar</button>
+            <button *ngIf="this.isRunning" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="stopTimer()">Detener</button>
+            <button *ngIf="this.isSpawn || this.isPokeballUsed" [disabled]="this.isPokeballUsed" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="catchPokemon()">Capturar</button>
+            <div class="grid grid-cols-2 gap-3 mt-2">
+                <button class="bg-custom-steelblue hover:bg-opacity-90 p-4" routerLink="/box">Caja</button>
+                <button class="bg-custom-dark-teal hover:bg-opacity-90 p-4 text-ellipsis overflow-clip">Opiciones</button>
+    
+            </div>
+        </div>
+    </section>
+</div>
