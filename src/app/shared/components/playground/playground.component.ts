@@ -29,6 +29,7 @@ export class PlaygroundComponent implements OnInit {
     .subscribe(stepFromService =>{
       if (stepFromService == Steps.SPAWNED) {
         this.isSpawn = true;
+        this.isPokeballUsed =  false;
         this.generateRandomPokemon();
       }
       if (stepFromService == Steps.POKEBALL_USED) {
