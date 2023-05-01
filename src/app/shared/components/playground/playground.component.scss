@@ -1,6 +1,7 @@
 
 .playground {
     background-image: url('../../../../assets/img/playground.jpg');
+    position: relative;
 
     .pokemon {
         transform: scale(3);
@@ -14,6 +15,10 @@
 
     .pokeball{
         animation: shake 1.25s cubic-bezier(.36,.07,.19,.97) 3;    
+    }
+
+    .grass{
+        transition: all .5s ease;
     }
 
     @keyframes shake {

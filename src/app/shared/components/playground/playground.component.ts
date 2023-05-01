@@ -18,6 +18,7 @@ export class PlaygroundComponent implements OnInit {
   @Output() pokemonSpawned = new EventEmitter<PokemonList>();
   private destroy$ = new Subject<void>();
   public isSpawn : boolean = false;
+  public isRunning : boolean = false;
   public isPokeballUsed : boolean = false;
   public pokemonUrl : string = '';
   
@@ -27,14 +28,11 @@ export class PlaygroundComponent implements OnInit {
       tap(()=> console.log('playground component ngoninit'))
     )
     .subscribe(stepFromService =>{
-      if (stepFromService == Steps.SPAWNED) {
-        this.isSpawn = true;
-        this.isPokeballUsed =  false;
+      this.isRunning =  stepFromService == Steps.RUNNING;
+      this.isSpawn = stepFromService == Steps.SPAWNED;
+      this.isPokeballUsed =  stepFromService == Steps.POKEBALL_USED;
+      if (this.isSpawn) {
         this.generateRandomPokemon();
-      }
-      if (stepFromService == Steps.POKEBALL_USED) {
-        this.isSpawn = false;
-        this.isPokeballUsed = true;
       }
     })
   }

@@ -1,5 +1,6 @@
-<div  class="playground bg-cover bg-center bg-no-repeat aspect-video w-full flex justify-center items-center">
+<div  class="playground bg-cover overflow-hidden bg-center bg-no-repeat aspect-video w-full flex justify-center items-center">
     <img *ngIf="this.isPokeballUsed" class="pokeball mt-8 w-9" src="../../../../assets/img/pokeball.png" alt="">
+    <img class="grass absolute bottom-0" [ngClass]="{'translate-y-full': !this.isRunning}" src="../../../../assets/img/search_pokemon.png" alt="">
     <ng-container *ngIf="this.isSpawn"> 
         <img class="pokemon pb-4 max-w-[10%]" [src]="this.pokemonUrl" alt="">
     </ng-container>
