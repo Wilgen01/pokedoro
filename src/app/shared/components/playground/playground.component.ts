@@ -4,6 +4,7 @@ import { Steps } from '../../enums/steps.enum';
 import { takeUntil, Subject, tap } from 'rxjs';
 import { PokemonService } from '../../services/pokemon/pokemon.service';
 import { PokemonList } from '../../models/pokemonList.interface';
+import { AudioService } from '../../services/audio/audio.service';
 
 @Component({
   selector: 'app-playground',
@@ -14,6 +15,7 @@ export class PlaygroundComponent implements OnInit {
 
   private readonly pomodoroService = inject(PomodoroService);
   private readonly pokemonService = inject(PokemonService);
+  private readonly audioService = inject(AudioService);
 
   @Output() pokemonSpawned = new EventEmitter<PokemonList>();
   private destroy$ = new Subject<void>();
@@ -32,6 +34,7 @@ export class PlaygroundComponent implements OnInit {
       this.isSpawn = stepFromService == Steps.SPAWNED;
       this.isPokeballUsed =  stepFromService == Steps.POKEBALL_USED;
       if (this.isSpawn) {
+        this.audioService.playAudioBattle();
         this.generateRandomPokemon();
       }
     })

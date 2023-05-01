@@ -3,6 +3,7 @@ import { PomodoroService } from '../../shared/services/pomodoro/pomodoro.service
 import { Steps } from 'src/app/shared/enums/steps.enum';
 import { Subject, takeUntil, tap, timer } from 'rxjs';
 import { PokemonList } from 'src/app/shared/models/pokemonList.interface';
+import { AudioService } from 'src/app/shared/services/audio/audio.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import { PokemonList } from 'src/app/shared/models/pokemonList.interface';
 export class HomeComponent {
 
   private readonly pomodoroService = inject(PomodoroService);
+  private readonly audioService = inject(AudioService);
 
   private destroy$ = new Subject<void>();
   public text : string = 'Opps! no hay nada aqui!!'
@@ -37,11 +39,13 @@ export class HomeComponent {
   }
 
   public startTimer(){
+    this.audioService.playAudioClick();
     this.pomodoroService.startTimer(0.05);
   }
 
   
   public stopTimer(){
+    this.audioService.playAudioClick();
     this.pomodoroService.stopTimer();
   }
   
@@ -58,10 +62,12 @@ export class HomeComponent {
 
   public catchPokemon(){
     if (this.isPokeballUsed) return
+    this.audioService.playAudioClick();
     this.pomodoroService.step$.next(Steps.POKEBALL_USED)
     timer(4000).subscribe(() => {
       this.pomodoroService.step$.next(Steps.NOT_STARTED)
       this.text = `!Ya está¡ ${this.randomPokemon.name.toLocaleUpperCase()} atrapado`
+      this.audioService.playAudioCaught();
     })
   }
 
