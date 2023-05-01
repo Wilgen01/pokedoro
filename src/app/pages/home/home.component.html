@@ -4,7 +4,7 @@
         <p class="text-xs text-cyan-100/75 ml-3 text-center">{{'Inicio de la aventura: 21/04/2023'}}</p>
         <p class="md:text-7xl text-6xl text-cyan-100/75 text-center mt-7">{{timeLeft()}}</p>
     </div>
-    <app-playground></app-playground>
+    <app-playground (pokemonSpawned)="pokemonSpawned($event)"></app-playground>
     <app-text-box [text]="this.text"></app-text-box>
     <div class="w-full py-10 bg-custom-teal px-3">
         <button *ngIf="this.isNotStarted" class="bg-custom-green hover:bg-custom-lightgreen p-4 w-full" (click)="startTimer()">Buscar</button>

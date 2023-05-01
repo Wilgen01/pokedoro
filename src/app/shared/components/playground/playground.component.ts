@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { PomodoroService } from '../../services/pomodoro/pomodoro.service';
 import { Steps } from '../../enums/steps.enum';
 import { takeUntil, Subject, tap } from 'rxjs';
@@ -15,6 +15,7 @@ export class PlaygroundComponent implements OnInit {
   private readonly pomodoroService = inject(PomodoroService);
   private readonly pokemonService = inject(PokemonService);
 
+  @Output() pokemonSpawned = new EventEmitter<string>();
   private destroy$ = new Subject<void>();
   public isSpawn : boolean = false;
   public pokemonUrl : string = '';
@@ -43,8 +44,7 @@ export class PlaygroundComponent implements OnInit {
     this.pokemonUrl = '';
     const shinyProbability  = 1
     const shinyRatio = Math.floor(Math.random() * 100) + 1;
-    console.log(`Oh! un ${pokemon.name} salvaje ha aparecido`);
-    
+    this.pokemonSpawned.emit(`¡Vaya!, un ${pokemon.name.toLocaleUpperCase()} salvaje apareció`)    
     if (shinyRatio <= shinyProbability) {
       this.pokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/${idPokemon}.gif`
     }else{

@@ -1,3 +1,7 @@
 <div  class="playground bg-cover bg-center bg-no-repeat aspect-video w-full flex justify-center items-center">
-    <img *ngIf="this.isSpawn" class="pb-4 max-w-[10%]" [src]="this.pokemonUrl" alt="">
+    <img class="pokeball w-9" src="../../../../assets/img/pokeball.png" alt="">
+    <ng-container *ngIf="this.isSpawn"> 
+        <img class="pokemon pb-4 max-w-[10%]" [src]="this.pokemonUrl" alt="">
+    </ng-container>
+    
 </div>

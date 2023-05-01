@@ -45,5 +45,9 @@ export class HomeComponent {
     return new Date(timeLeft * 1000).toLocaleTimeString().split(':').slice(1).join(':');
   }
 
+  public pokemonSpawned(event: string){
+    this.text = event;
+  }
+
 
 }

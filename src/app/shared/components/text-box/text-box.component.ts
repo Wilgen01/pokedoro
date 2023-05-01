@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy} from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges} from '@angular/core';
 import { interval, Observable, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
@@ -7,7 +7,7 @@ import { takeUntil, tap } from 'rxjs/operators';
   templateUrl: './text-box.component.html',
   styleUrls: ['./text-box.component.scss']
 })
-export class TextBoxComponent implements OnInit, OnDestroy{
+export class TextBoxComponent implements OnInit, OnChanges , OnDestroy{
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
   @Input() text: string = ''
@@ -15,7 +15,14 @@ export class TextBoxComponent implements OnInit, OnDestroy{
   
   
   ngOnInit(): void {
-    this.animateText();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['text']) {
+      this.animateText();
+      this.textToShow = '';
+    }
+    
   }
 
   ngOnDestroy() {
