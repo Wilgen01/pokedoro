@@ -32,6 +32,7 @@ export class PlaygroundComponent implements OnInit {
         this.generateRandomPokemon();
       }
       if (stepFromService == Steps.POKEBALL_USED) {
+        this.isSpawn = false;
         this.isPokeballUsed = true;
       }
     })
@@ -40,7 +41,7 @@ export class PlaygroundComponent implements OnInit {
   public generateRandomPokemon() {
     const randomPokemonId = Math.floor(Math.random() * 386) + 1;
     this.pokemonService.getPokemons().subscribe(pokemonList =>{
-      this.spawnRandomPokemon(pokemonList[randomPokemonId], randomPokemonId)
+      this.spawnRandomPokemon(pokemonList[randomPokemonId - 1], randomPokemonId)
     })
   }
 

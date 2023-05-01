@@ -1,7 +1,7 @@
 import { Component, inject} from '@angular/core';
 import { PomodoroService } from '../../shared/services/pomodoro/pomodoro.service';
 import { Steps } from 'src/app/shared/enums/steps.enum';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { Subject, takeUntil, tap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +17,8 @@ export class HomeComponent {
   public isSpawn : boolean = false;
   public isRunning : boolean = false;
   public isNotStarted : boolean = true;
+  public isPokeballUsed : boolean = false;
+  public isPokemonCatched : boolean = false;
 
   ngOnInit(): void {
     this.pomodoroService.step$.pipe(
@@ -27,6 +29,8 @@ export class HomeComponent {
       this.isSpawn = stepFromService == Steps.SPAWNED
       this.isRunning = stepFromService == Steps.RUNNING
       this.isNotStarted = stepFromService == Steps.NOT_STARTED
+      this.isPokeballUsed = stepFromService == Steps.POKEBALL_USED
+      this.isPokemonCatched = stepFromService == Steps.POKEMON_CATCH
     })
   }
 
@@ -50,7 +54,12 @@ export class HomeComponent {
   }
 
   public catchPokemon(){
-    // this.pomodoroService.step$ = Steps.POKEBALL_USED
+    if (this.isPokeballUsed) return
+    this.pomodoroService.step$.next(Steps.POKEBALL_USED)
+    timer(4000).subscribe(() => {
+      this.pomodoroService.step$.next(Steps.NOT_STARTED)
+      this.text = `!Ya está¡ El pokemon ha sido atrapado`
+    })
   }
 
 
