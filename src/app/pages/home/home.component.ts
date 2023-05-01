@@ -2,6 +2,7 @@ import { Component, inject} from '@angular/core';
 import { PomodoroService } from '../../shared/services/pomodoro/pomodoro.service';
 import { Steps } from 'src/app/shared/enums/steps.enum';
 import { Subject, takeUntil, tap, timer } from 'rxjs';
+import { PokemonList } from 'src/app/shared/models/pokemonList.interface';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomeComponent {
 
   private destroy$ = new Subject<void>();
   public text : string = 'Opps! no hay nada aqui!!'
+  public randomPokemon !: PokemonList;
   public isSpawn : boolean = false;
   public isRunning : boolean = false;
   public isNotStarted : boolean = true;
@@ -35,7 +37,7 @@ export class HomeComponent {
   }
 
   public startTimer(){
-    this.pomodoroService.startTimer(0.1);
+    this.pomodoroService.startTimer(0.05);
   }
 
   
@@ -49,8 +51,9 @@ export class HomeComponent {
     return new Date(timeLeft * 1000).toLocaleTimeString().split(':').slice(1).join(':');
   }
 
-  public pokemonSpawned(event: string){
-    this.text = event;
+  public pokemonSpawned(event: PokemonList){
+    this.randomPokemon = event
+    this.text = `¡Vaya!, un ${event.name.toLocaleUpperCase()} ${event.isShiny? 'SHINY' : ''} salvaje apareció`;
   }
 
   public catchPokemon(){
@@ -58,7 +61,7 @@ export class HomeComponent {
     this.pomodoroService.step$.next(Steps.POKEBALL_USED)
     timer(4000).subscribe(() => {
       this.pomodoroService.step$.next(Steps.NOT_STARTED)
-      this.text = `!Ya está¡ El pokemon ha sido atrapado`
+      this.text = `!Ya está¡ ${this.randomPokemon.name.toLocaleUpperCase()} atrapado`
     })
   }
 

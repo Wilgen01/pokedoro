@@ -34,7 +34,7 @@ export class PomodoroService {
     this._timeLeft =  timeInMinutes * 60
     this.timer$.subscribe(value =>{
       this._timeLeft -= 1
-      if (this._timeLeft == 0) {
+      if (this._timeLeft <= 0) {
         this.completeTimer();
       }
     })

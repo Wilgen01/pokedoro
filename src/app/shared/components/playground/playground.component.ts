@@ -15,7 +15,7 @@ export class PlaygroundComponent implements OnInit {
   private readonly pomodoroService = inject(PomodoroService);
   private readonly pokemonService = inject(PokemonService);
 
-  @Output() pokemonSpawned = new EventEmitter<string>();
+  @Output() pokemonSpawned = new EventEmitter<PokemonList>();
   private destroy$ = new Subject<void>();
   public isSpawn : boolean = false;
   public isPokeballUsed : boolean = false;
@@ -49,12 +49,13 @@ export class PlaygroundComponent implements OnInit {
     this.pokemonUrl = '';
     const shinyProbability  = 1
     const shinyRatio = Math.floor(Math.random() * 100) + 1;
-    this.pokemonSpawned.emit(`¡Vaya!, un ${pokemon.name.toLocaleUpperCase()} salvaje apareció`)    
     if (shinyRatio <= shinyProbability) {
+      pokemon.isShiny = true;
       this.pokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/${idPokemon}.gif`
     }else{
       this.pokemonUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${idPokemon}.gif`
     }
+    this.pokemonSpawned.emit(pokemon);    
   }
 
 }
