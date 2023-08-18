@@ -1,4 +1,4 @@
-import { Component, inject} from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { PomodoroService } from '../../shared/services/pomodoro/pomodoro.service';
 import { Steps } from 'src/app/shared/enums/steps.enum';
 import { Subject, takeUntil, tap, timer } from 'rxjs';
@@ -12,12 +12,12 @@ import { db } from 'src/app/shared/services/dataBase/db';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
 
   private readonly pomodoroService = inject(PomodoroService);
   private readonly audioService = inject(AudioService);
 
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<boolean> = new Subject();
   public text : string = 'Opps! no hay nada aqui!!'
   public randomPokemon !: PokemonList;
   public isSpawn : boolean = false;
@@ -38,6 +38,10 @@ export class HomeComponent {
       this.isPokeballUsed = stepFromService == Steps.POKEBALL_USED
       this.isPokemonCatched = stepFromService == Steps.POKEMON_CATCH
     })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 
   public startTimer(){

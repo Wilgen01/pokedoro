@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject, OnDestroy } from '@angular/core';
 import { PomodoroService } from '../../services/pomodoro/pomodoro.service';
 import { Steps } from '../../enums/steps.enum';
 import { takeUntil, Subject, tap } from 'rxjs';
@@ -11,14 +11,14 @@ import { AudioService } from '../../services/audio/audio.service';
   templateUrl: './playground.component.html',
   styleUrls: ['./playground.component.scss']
 })
-export class PlaygroundComponent implements OnInit {
-
+export class PlaygroundComponent implements OnInit, OnDestroy {
+ 
   private readonly pomodoroService = inject(PomodoroService);
   private readonly pokemonService = inject(PokemonService);
   private readonly audioService = inject(AudioService);
 
   @Output() pokemonSpawned = new EventEmitter<PokemonList>();
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<boolean> = new Subject();
   public isSpawn : boolean = false;
   public isRunning : boolean = false;
   public isPokeballUsed : boolean = false;
@@ -38,6 +38,10 @@ export class PlaygroundComponent implements OnInit {
         this.generateRandomPokemon();
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 
   public generateRandomPokemon() {
