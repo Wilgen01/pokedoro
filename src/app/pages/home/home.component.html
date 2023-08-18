@@ -12,9 +12,8 @@
             <button *ngIf="this.isRunning" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="stopTimer()">Detener</button>
             <button *ngIf="this.isSpawn || this.isPokeballUsed" [disabled]="this.isPokeballUsed" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="catchPokemon()">Capturar</button>
             <div class="grid grid-cols-2 gap-3 mt-2">
-                <button class="bg-custom-steelblue hover:bg-opacity-90 p-4" routerLink="/box">Caja</button>
-                <button class="bg-custom-dark-teal hover:bg-opacity-90 p-4 text-ellipsis overflow-clip">Opiciones</button>
-    
+                <button appClickSound class="bg-custom-steelblue hover:bg-opacity-90 p-4" routerLink="/box">Caja</button>
+                <button appClickSound class="bg-custom-dark-teal hover:bg-opacity-90 p-4 text-ellipsis overflow-clip">Opciones</button>
             </div>
         </div>
     </section>

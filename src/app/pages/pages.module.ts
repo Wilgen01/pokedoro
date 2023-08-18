@@ -7,6 +7,7 @@ import { TextBoxModule } from '../shared/components/text-box/text-box.module';
 import { PomodoroService } from '../shared/services/pomodoro/pomodoro.service';
 import { PlaygroundModule } from '../shared/components/playground/playground.module';
 import { BoxComponent } from './box/box.component';
+import { DirectivesModule } from '../directives/directives.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { BoxComponent } from './box/box.component';
     CommonModule,
     PagesRoutingModule,
     TextBoxModule,
-    PlaygroundModule
+    PlaygroundModule,
+    DirectivesModule
   ],
   providers: [
     PomodoroService
