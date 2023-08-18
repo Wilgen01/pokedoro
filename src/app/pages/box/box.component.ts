@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { liveQuery } from 'dexie';
+import { Observable, liveQuery } from 'dexie';
 import { from } from 'rxjs';
 import { PokemonDataBase } from 'src/app/shared/models/pokemonList.interface';
 
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class BoxComponent {
 
-  userPokemons$ = liveQuery(() => db.UserPokemonTable.toArray());
+  userPokemons$: Observable<PokemonDataBase[]> = liveQuery(() => db.UserPokemonTable.toArray());
   totalPokemons$ = from(db.UserPokemonTable.count()); 
 
   publicGetPokemonUrlById(pokemon: PokemonDataBase){

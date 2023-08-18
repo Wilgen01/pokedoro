@@ -31,7 +31,7 @@ export class TextBoxComponent implements OnInit, OnChanges , OnDestroy{
   }
 
   private animateText() {
-    const typing$: Observable<number> = interval(70);
+    const typing$: Observable<number> = interval(50);
     const textLength = this.text.length;
 
     typing$

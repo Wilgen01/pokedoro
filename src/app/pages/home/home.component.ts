@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pomodoroService.step$.pipe(
       takeUntil(this.destroy$),
-      tap(()=> console.log('playground component ngoninit'))
+      tap(()=> console.log('home component'))
     )
     .subscribe(stepFromService =>{
       this.isSpawn = stepFromService == Steps.SPAWNED
@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
+    this.destroy$.complete()
   }
 
   public startTimer(){
@@ -56,7 +57,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   
   
-  public timeLeft(): string{
+  public timeLeft(): string{    
     const timeLeft = this.pomodoroService.timeLeft;
     return new Date(timeLeft * 1000).toLocaleTimeString().split(':').slice(1).join(':');
   }

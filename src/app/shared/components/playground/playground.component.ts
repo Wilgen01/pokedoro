@@ -27,7 +27,7 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pomodoroService.step$.pipe(
       takeUntil(this.destroy$),
-      tap(()=> console.log('playground component ngoninit'))
+      tap(()=> console.log('playground component'))
     )
     .subscribe(stepFromService =>{
       this.isRunning =  stepFromService == Steps.RUNNING;
@@ -42,6 +42,7 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
+    this.destroy$.complete()
   }
 
   public generateRandomPokemon() {
@@ -53,7 +54,7 @@ export class PlaygroundComponent implements OnInit, OnDestroy {
 
   public spawnRandomPokemon(pokemon : PokemonList, idPokemon: number) {
     this.pokemonUrl = '';
-    const shinyProbability  = 1
+    const shinyProbability  = 1;
     const shinyRatio = Math.floor(Math.random() * 100) + 1;
     if (shinyRatio <= shinyProbability) {
       pokemon.isShiny = true;
