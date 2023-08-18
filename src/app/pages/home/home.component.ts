@@ -5,6 +5,8 @@ import { Subject, takeUntil, tap, timer } from 'rxjs';
 import { PokemonList } from 'src/app/shared/models/pokemonList.interface';
 import { AudioService } from 'src/app/shared/services/audio/audio.service';
 
+import { db } from 'src/app/shared/services/dataBase/db';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -68,6 +70,15 @@ export class HomeComponent {
       this.pomodoroService.step$.next(Steps.NOT_STARTED)
       this.text = `!Ya está¡ ${this.randomPokemon.name.toLocaleUpperCase()} atrapado`
       this.audioService.playAudioCaught();
+      this.addPokemonToBox(this.randomPokemon);
+    })
+  }
+
+  public async addPokemonToBox(pokemon: PokemonList){
+    await db.UserPokemonTable.add({
+      pokemonId: pokemon.id,
+      isShiny: pokemon.isShiny? true : false,
+      catchedDate: new Date().getTime()
     })
   }
 
