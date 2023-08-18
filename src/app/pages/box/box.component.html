@@ -6,7 +6,7 @@
             <p class="md:text-6xl text-5xl xl:text-7xl text-cyan-100/75 text-center mt-7">{{totalPokemons$ | async}}</p>
         </div>
         <div
-            class="w-full py-10 px-5 min-h-[350px] max-h-[400px] bg-custom-teal grid items-center grid-cols-3 md:grid-cols-4 gap-4 auto-rows-max overflow-y-scroll">
+            class="w-full py-10 px-5 min-h-[350px] max-h-[400px] bg-custom-teal grid items-center grid-cols-3 md:grid-cols-4 gap-4 auto-rows-max overflow-y-scroll custom-scroll">
             <div *ngFor="let pokemon of userPokemons$ | async"
                 class="rounded-md aspect-square flex justify-center items-center bg-custom-steelblue bg-opacity-50">
 
