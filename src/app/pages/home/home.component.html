@@ -1,13 +1,13 @@
-<div class="h-screen flex">
+<div class="h-screen flex px-2 sm:px-0">
     <section class="container max-w-xl xl:w-6/12 m-auto sm:w-full min-w-min overflow-hidden">
         <div class="w-full py-10 bg-custom-teal border-4 border-custom-dark-teal relative custom-border">
-            <h1 class="text-2xl ml-3 text-center">Wilgen García</h1>
+            <h1 class="text-sm md:text-xl xl::text-2xl ml-3 mb-2 text-center">Wilgen García</h1>
             <p class="text-xs text-cyan-100/75 ml-3 text-center">{{'Inicio de la aventura: 21/04/2023'}}</p>
-            <p class="md:text-7xl text-6xl text-cyan-100/75 text-center mt-7">{{timeLeft()}}</p>
+            <p class="md:text-6xl text-5xl xl:text-7xl text-cyan-100/75 text-center mt-7">{{timeLeft()}}</p>
         </div>
         <app-playground (pokemonSpawned)="pokemonSpawned($event)"></app-playground>
         <app-text-box [text]="this.text"></app-text-box>
-        <div class="w-full py-10 bg-custom-teal px-3">
+        <div class="w-full py-10 bg-custom-teal px-3 text-xs md:text-lg xl:text-xl">
             <button *ngIf="this.isNotStarted" class="bg-custom-green hover:bg-custom-lightgreen p-4 w-full" (click)="startTimer()">Buscar</button>
             <button *ngIf="this.isRunning" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="stopTimer()">Detener</button>
             <button *ngIf="this.isSpawn || this.isPokeballUsed" [disabled]="this.isPokeballUsed" class="bg-custom-red hover:bg-custom-lightred p-4 w-full" (click)="catchPokemon()">Capturar</button>
